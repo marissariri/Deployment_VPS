@@ -1,0 +1,28 @@
+services:
+  spring-app-student3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${DOCKERHUB_USERNAME}/spring-app-student3:latest
+    container_name: spring-app-student3
+    ports:
+      - ${APP_PORT:-9003}:${APP_PORT:-9003}
+    env_file:
+      - .env
+    restart: always
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "wget --quiet --tries=1 --spider http://localhost:$${APP_PORT:-9003}/actuator/health || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - be_classroom_net
+
+networks:
+  be_classroom_net:
+    external: true
