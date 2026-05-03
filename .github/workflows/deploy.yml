@@ -76,6 +76,10 @@ jobs:
           script: |
             cd ${{ env.APP_DIR }}
             echo "🚀 Starting deployment..."
+            
+            echo "📝 Creating .env file..."
+            echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" > .env
+            echo "APP_PORT=9003" >> .env
 
             echo "📥 Pulling latest image..."
             docker compose pull
