@@ -80,7 +80,12 @@ jobs:
             echo "📝 Creating .env file..."
             echo "DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}" > .env
             echo "APP_PORT=9003" >> .env
-
+            
+            # 🔥 INI BAGIAN KAMU
+            echo "DB_URL=jdbc:mysql://localhost:3306/db_spring_student3" >> .env
+            echo "DB_USER=backend" >> .env
+            echo "DB_PASSWORD=rahasia_banget" >> .env
+      
             echo "📥 Pulling latest image..."
             docker compose pull
 
