@@ -49,6 +49,12 @@ jobs:
             ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
             ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}:latest
 
+      # 🔍 DEBUG (TARUH DI SINI)
+      - name: Debug Secrets
+        run: |
+          echo "HOST=${{ secrets.VPS_HOST }}"
+          echo "USER=${{ secrets.VPS_USER }}"
+
       # 📦 Copy compose
       - name: Copy docker-compose to VPS
         uses: appleboy/scp-action@v0.1.7
