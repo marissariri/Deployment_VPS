@@ -82,7 +82,8 @@ jobs:
             echo "APP_PORT=9003" >> .env
             
             # 🔥 INI BAGIAN KAMU
-            echo "DB_URL=jdbc:mysql://localhost:3306/db_spring_student3" >> .env
+            echo "DB_URL=jdbc:mysql://mysql:3306/db_spring_student3?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC" >> .env
+            echo "DB_NAME=db_spring_student3" >> .env
             echo "DB_USER=backend" >> .env
             echo "DB_PASSWORD=rahasia_banget" >> .env
       
