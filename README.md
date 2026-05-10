@@ -45,13 +45,16 @@
 ## API Documentation / Testing
 Berikut adalah endpoint utama yang dapat diuji melalui Postman:
 - **GET All Products**: `GET http://<ip_vps>:9003/products`
+<img width="832" height="780" alt="Screenshot 2026-05-10 at 11 30 54 AM" src="https://github.com/user-attachments/assets/aa504ce8-bbb6-4725-b23c-0be901518c1b" />
+
 - **Create Product**: `POST http://<ip_vps>:9003/products`
   Body JSON contoh:
   ```json
   {
-      "name": "Produk Test",
-      "price": 10000.00
+      "name": "Testing VPS Bootcamp",
+      "price": 100000
   }
   ```
+<img width="833" height="547" alt="Screenshot 2026-05-10 at 11 29 55 AM" src="https://github.com/user-attachments/assets/b5485b90-4bb8-414e-8d49-a757577396eb" />
 
-*(Silakan tambahkan link dokumentasi Postman / taruh hasil screenshot di repositori ini sesuai instruksi assignment)*
+
