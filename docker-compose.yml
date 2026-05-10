@@ -1,4 +1,29 @@
 services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "3306:3306"
+    networks:
+      - app_net
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: always
+
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    networks:
+      - app_net
+    restart: always
+
   spring-app-student3:
     build:
       context: .
@@ -6,9 +31,15 @@ services:
     image: ${DOCKERHUB_USERNAME}/spring-app-student3:latest
     container_name: spring-app-student3
     ports:
-      - ${APP_PORT:-9003}:${APP_PORT:-9003}
+      - "${APP_PORT:-9003}:${APP_PORT:-9003}"
     env_file:
       - .env
+    environment:
+      - DB_HOST=mysql
+      - REDIS_HOST=redis
+    depends_on:
+      - mysql
+      - redis
     restart: always
     healthcheck:
       test:
@@ -21,8 +52,11 @@ services:
       retries: 3
       start_period: 40s
     networks:
-      - be_classroom_net
+      - app_net
 
 networks:
-  be_classroom_net:
-    external: true
+  app_net:
+    driver: bridge
+
+volumes:
+  mysql_data:
